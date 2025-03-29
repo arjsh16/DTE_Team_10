@@ -61,11 +61,43 @@ function handleFileUpload(file) {
         reader.readAsDataURL(file);
     }
 
-    // Submit Button
-    submitBtn.addEventListener("click", () => {
-        submitBtn.classList.add("hidden");
-        arrow.style.display = "block"; // Show large arrow
-    });
+// Submit Button
+submitBtn.addEventListener("click", async () => {
+    submitBtn.classList.add("hidden");
+    arrow.style.display = "block"; // Show large arrow
+
+    const fileInput = document.getElementById("fileInput");
+    const file = fileInput.files[0]; // Get selected file
+
+    if (!file) {
+        alert("Please select an image first!");
+        submitBtn.classList.remove("hidden"); // Show button again
+        arrow.style.display = "none"; // Hide arrow
+        return;
+    }
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    try {
+        const response = await fetch("http://localhost:8080/upload", { // Fixed endpoint
+            method: "POST",
+            body: formData,
+        });
+
+        if (!response.ok) {
+            throw new Error(`Upload failed: ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        alert(`File uploaded successfully!\nFilename: ${data.filename}`);
+    } catch (error) {
+        alert(`Error: ${error.message}`);
+    } finally {
+        submitBtn.classList.remove("hidden"); // Show button again
+        arrow.style.display = "none"; // Hide arrow
+    }
+});
 
     // Reset Button
     refreshBtn.addEventListener("click", () => {
