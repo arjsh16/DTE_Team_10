@@ -1,0 +1,21 @@
+
+# Backend
+fastapi
+uvicorn
+numpy
+opencv-python
+scipy
+tensorflow
+pillow
+psycopg2-binary  # PostgreSQL support
+
+# Frontend
+next
+react
+axios
+
+# Deployment & Utilities
+docker
+gunicorn
+google-cloud-storage
+streamlit
