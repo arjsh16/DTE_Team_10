@@ -1,0 +1,122 @@
+/* Background with Purple Gradient */
+body {
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    background: url('https://imgs.search.brave.com/D99KG-zeQPsp09isRJzf8AKrIGHu6tk0c_ckvm3SRwU/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/ZnJlZS1waG90by8z/ZC1hYnN0cmFjdC1k/YXRhLXRlY2hub2xv/Z3ktYmFja2dyb3Vu/ZC13aXRoLWZsb3dp/bmctd2F2ZXNfMTA0/OC0xODUwNi5qcGc_/c2VtdD1haXNfaHli/cmlk') no-repeat center center fixed;
+    background-size: cover; /* Ensures it covers the full page */
+    color: black;
+    margin: 20px;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Darkening Effect - Very Focused (1.5x Cursor Size) */
+
+/* Page Title */
+h1 {
+       font-size: 32px;
+    background: linear-gradient(45deg, #ff9a76, #ffb347); /* Soft purple gradient */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; /* Gradient text effect */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Soft glow for readability */
+    font-weight: bold;
+}
+
+/* Container */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 30px;
+    position: relative;
+}
+
+/* Drag & Drop Box */
+.upload-box {
+    border: 3px dashed #bbb;
+    padding: 20px;
+    width: 230px;
+    height: 170px;
+    background: white;
+    border-radius: 12px;
+    cursor: pointer;
+    text-align: center;
+    transition: transform 0.2s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    color: black; /* ⬅️ Ensures text inside is black */
+    font-weight: bold; /* Makes it stand out */
+}
+
+/* Hover Effect */
+/* Uploaded Image - Matches Upload Box Size */
+.upload-box img {
+    width: 100%; /* Makes the image fit inside */
+    height: 100%;
+    object-fit: cover; /* Ensures the image scales properly */
+    border-radius: 10px; /* Slight round corners for better look */
+    display: none; /* Hidden until image is uploaded */
+}
+.upload-box:hover {
+    background: #e6ccff;
+    border-color: #8a2be2;
+}
+
+
+/* Cursor Proximity Effect */
+.shrink {
+    transform: scale(0.9);  /* Shrinks slightly */
+}
+
+/* Buttons */
+.btn {
+    padding: 12px 20px;
+    border: none;
+    cursor: pointer;
+    background: linear-gradient(45deg, #ff7eb3, #ff4b2b);
+    color: white;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: transform 0.2s ease-in-out;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Shrink effect when cursor moves nearby */
+.shrink-btn {
+    transform: scale(0.9);
+}
+
+/* Large Arrow */
+#arrow {
+    font-size: 50px;
+    display: none;
+    animation: bounce 1s infinite;
+}
+
+/* Reset Button */
+.refresh-btn {
+    display: block;
+    margin: 30px auto;
+    background: linear-gradient(45deg, #ff4b2b, #ff416c);
+}
+
+.refresh-btn:hover {
+    background: linear-gradient(45deg, #d9391e, #d8325e);
+}
+
+/* Hidden Elements */
+.hidden {
+    display: none;
+}
+
+/* Animations */
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
