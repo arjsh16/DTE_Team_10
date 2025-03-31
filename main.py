@@ -7,9 +7,6 @@ import os
 import shutil
 import mimetypes
 import numpy as np
-from typing import Optional
-
-# Import image processing functions
 from image_processing import process_file
 
 app = FastAPI()
