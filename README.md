@@ -41,10 +41,10 @@ To install and run this project locally, follow these steps:
 To start the application, run:
 
 ```bash
-python app.py
+python main.py
 ```
 
-Then, open your browser and navigate to `http://localhost:5000` to access the application.
+Then, open the index.html to start using our project.
 
 ## File Structure
 
