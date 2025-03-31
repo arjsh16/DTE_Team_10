@@ -1,3 +1,4 @@
+    
 from fastapi import FastAPI, File, UploadFile, Query, Form
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
@@ -5,6 +6,7 @@ import uvicorn
 import os
 import shutil
 import mimetypes
+import numpy as np
 from typing import Optional
 
 # Import image processing functions
@@ -29,6 +31,20 @@ PROCESSED_DIR = os.path.join(BASE_DIR, "processed")
 os.makedirs(BASE_DIR, exist_ok=True)
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 os.makedirs(PROCESSED_DIR, exist_ok=True)
+
+# Helper function to convert NumPy values to Python native types
+def convert_numpy_to_python(data):
+    """Convert NumPy data types to Python native types for JSON serialization"""
+    if isinstance(data, np.number):
+        return data.item()  # Convert to Python scalar
+    elif isinstance(data, np.ndarray):
+        return data.tolist()  # Convert to Python list
+    elif isinstance(data, dict):
+        return {k: convert_numpy_to_python(v) for k, v in data.items()}
+    elif isinstance(data, list) or isinstance(data, tuple):
+        return [convert_numpy_to_python(item) for item in data]
+    else:
+        return data
 
 @app.get("/")
 def home():
@@ -106,6 +122,9 @@ async def process_media(
         # Return the processed filename and metrics
         processed_filename = os.path.basename(result_path)
         
+        # Convert any NumPy values in metrics to Python native types
+        metrics = convert_numpy_to_python(metrics)
+        
         return {
             "message": "Media processed successfully",
             "processed_file": processed_filename,
@@ -142,7 +161,8 @@ def get_file(filename: str):
                 media_type=mime_type or "application/octet-stream", 
                 filename=safe_filename
             )
-
+            
+        # If we get here, the file was not found in either directory
         return JSONResponse(content={"error": "File not found"}, status_code=404)
 
     except Exception as e:
@@ -164,4 +184,3 @@ def list_files(type: str = "all"):
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8080))
     uvicorn.run(app, host="0.0.0.0", port=port)
-
