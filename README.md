@@ -48,7 +48,8 @@ Then, open your browser and navigate to `http://localhost:5000` to access the ap
 
 ## File Structure
 
-- `app.py`: Main file that keeps the flow of execution maintained.
+- `main.py`: Main file that keeps the flow of execution maintained.
+- `image_processing.py`: Processes the image and returns the enhanced image.
 - `index.html`: Homepage of the application.
 - `script.js`: JavaScript functionalities.
 - `styles.css`: Styling for the application.
